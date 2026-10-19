@@ -16,7 +16,7 @@ For each paper you'll find its arXiv ID, title, author list, subject category an
 |---|---|
 | **arXiv ID** | 2609.19244 (v1) |
 | **Title** | Characterizing Web Search by Conversational LLM Agents: From Search Decisions and Strategies to Results and Responses |
-| **Authors** | Mahsa Amani, Seungeon Lee, Abhisek Dash, Asmaa El Fraihi, Yujna Jang, Elisabeth Kirsten, Qinyuan Wu, Krishna P. Gummadi, Manish Gupta, Abhilasha Ravichander, Muhammad Bilal Zafar, Soumi Das |
+| **Authors** | Mahsa Amani, Seungeon Lee, Abhisek Dash, Asmaa El Fraihi, Yunah Jang, Elisabeth Kirsten, Qinyuan Wu, Krishna P. Gummadi, Manish Gupta, Abhilasha Ravichander, Muhammad Bilal Zafar, Soumi Das |
 | **Subject category** | Artificial Intelligence (cs.AI) — primary; Information Retrieval (cs.IR) |
 | **Submission date** | Wed, 16 Sep 2026 17:56:32 UTC |
 | **URL** | https://arxiv.org/abs/2609.19244 |
