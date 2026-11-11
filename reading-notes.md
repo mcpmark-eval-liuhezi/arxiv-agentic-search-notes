@@ -37,7 +37,7 @@ Each paper entry lists: arXiv ID, title, author list, subject category (verified
 - **Title:** The Evolution of Tool Use in LLM Agents: From Single-Tool Call to Multi-Tool Orchestration
 - **Authors:** Haoyuan Xu, Chang Li, Xinyan Ma, Xianhao Ou, Zihan Zhang, Tao He, Xiangyu Liu, Zixiang Wang, Jiafeng Liang, Zheng Chu, Runxuan Liu, Rongchuan Mu, Dandan Tu, Ming Liu, Bing Qin
 - **Subject category (arXiv abs page):** cs.SE (primary), cs.CL
-- **Submission date (arXiv abs page):** v1 Tue, 24 Mar 2026 07:05:05 UTC (v2 Thu, 2 Apr 2026 02:54:00 USD)
+- **Submission date (arXiv abs page):** v1 Tue, 24 Mar 2026 07:05:05 UTC (v2 Thu, 2 Apr 2026 02:54:00 UTC)
 - **Abstract summary:** This survey argues the central problem in LLM agents has shifted from whether a model can make a correct single tool call to multi-tool orchestration over long trajectories with intermediate state, execution feedback, and constraints like safety, cost, and verifiability. It unifies task formulations, organizes the literature around six core dimensions (inference-time planning/execution, training/trajectory construction, safety/control, efficiency under resource constraints, capability completeness in open environments, and benchmark design/evaluation), and summarizes applications in software engineering, enterprise workflows, GUIs, and mobile systems.
 
 ### Extracted findings (from full text)
