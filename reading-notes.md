@@ -1,81 +1,75 @@
-# Reading Notes: Agentic Search and Tool Use in LLM Agents
+# Reading Notes: Agentic Search and Tool Use
 
-**Prepared for:** Thursday team sync on agentic search — assistants where an LLM-driven agent searches, calls tools, and hands answers to users.
-**Scope:** Recent arXiv papers found by searching the phrasings "conversational search agents", "tool use in LLM agents", and "user trust in AI assistants". Full texts were read end to end (via the arXiv download tooling) and public arXiv abstract pages were checked for primary subject category and submission date.
+## Introduction
 
-This brief covers three papers on agentic search:
+This brief covers recent arXiv literature on **agentic search** — assistants where an LLM-driven agent searches, calls tools, and hands answers to users. It was prepared for Thursday's team sync. We searched arXiv with phrasings such as "conversational search agents", "tool use in LLM agents", and "user trust in AI assistants", and selected the two or three most relevant hits. For each paper we read beyond the abstract (full text downloaded and reviewed) and extracted at least two concrete findings, each tagged with the section it came from. We also verified each paper's public arXiv abstract page for its primary subject category and submission date.
 
-1. **arXiv:2611.12705** — *Multi-Agent Screening: What Agreement and Acceptance Cannot Tell You* (cs.MA, submitted 9 Nov 2026). A formal analysis of what evidence from multi-agent screening systems can and cannot tell us about recall, with AI review of papers as a worked example.
-2. **arXiv:2401.01330** — *TREC iKAT 2023: The Interactive Knowledge Assistance Track Overview* (cs.IR, submitted 2 Jan 2024, revised 22 Feb 2024). An overview of the TREC Interactive Knowledge Assistance Track for researching conversational search agents that adapt to user personas.
-3. **arXiv:2404.08630** — *A Conceptual Framework for Conversational Search and Recommendation: Conceptualizing Agent-Human Interactions During the Conversational Search Process* (cs.IR, submitted 12 Apr 2024). A conceptual framework formalizing the actions and intents of users and agents in conversational search.
+## Papers Covered
 
-For each paper we record the arXiv ID, title, author list, subject category (as shown on the public arXiv abstract page), submission date, a two-to-three sentence abstract summary, and at least two concrete findings extracted from the full text, each tagged with the section it came from.
-
----
-
-## Paper 1: arXiv:2611.12705 — Multi-Agent Screening: What Agreement and Acceptance Cannot Tell You
-
-**Authors:** Benjamin Chang, Dell Zhang
-**Subject category (from abs page):** Multiagent Systems (cs.MA); Artificial Intelligence (cs.AI); Information Retrieval (cs.IR). Primary category: **cs.MA**
-**Submission date (from abs page):** [v1] Mon, 9 Nov 2026 17:00:16 UTC
-**Abstract page:** https://arxiv.org/abs/2611.12705
-
-### Abstract summary
-
-When AI agents screen items for a costly human assessor — as in agentic search, e-discovery, and AI reviewing of papers — only what they pass gets judged. This paper shows what each kind of evidence can establish about agent errors even with unlimited data, in the "incomplete-judgment" setting of pooled evaluation. Agreement shows that agents concur, not that they are right; assessor acceptance gives precision but only a lower bound on recall; and menus of agents' findings give an upper bound on recall when finds are not negatively correlated. Without assumptions about the agents, recall can be pinned down only by auditing items they did not pass, and the sample size needed does not grow with the number of agents.
-
-### Extracted findings (from full text)
-
-- **Finding 1 (Section 3, "What Each Kind of Evidence Can Tell Us" — Theorem 3.1, Agreement):** Agents built on similar models err together, which the paper models as a shared latent variable Z with Y and O conditionally independent given Z. Theorem 3.1 proves that the error of any pooling rule π, P(A≠Y), is at least E[min{η(Z), 1−η(Z)}], and that the distribution of agent outputs does not depend on η — so no statistic of the outputs alone can distinguish a right consensus from a wrong one. The authors note that "agreement shows that agents concur, not that they are right, however many there are," and that label-free methods like Dawid–Skene can only identify error rates against a discrete Z up to relabelling — reading Z as Y is an assumption outputs cannot test.
-- **Finding 2 (Section 3, "What Each Kind of Evidence Can Tell Us" — Proposition 1 & Proposition 2):** Assessor acceptance estimates precision p, not the unknown miss rate H, and Proposition 1 gives the tight recall interval [ap/(ap+1−a), 1], since r = ap/(ap+H) decreases in H and the data allow any H ∈ [0, 1−a]. Proposition 2 (Next agent) shows that if agents A₁, …, A_{k+1} are exchangeable given Y=1, a new interchangeable agent k+1 adds at most a share f₁/k of the collection's relevant items — so a 4th reviewer adds at most 30 acceptable papers in the paper's worked example (120Acceptable, f₁ = 90, k = 3). The worked example (Section 4) computes that a 4th interchangeable reviewer adds at most 90/3 = 30 acceptable papers, while an audit of 192 of the other 800 submissions estimates H to ±0.05 with 95% confidence and, under positive dependence, finds at least 192 × 150/800 = 36 missed papers in expectation.
-- **Finding 3 (Section 3, "Audit: closing the gap" — Proposition 3, and Section 5, "Take-Home Messages"):** Only judgments outside the pool pin down H without assumptions on the agents: Proposition 3 shows |Ĥ − H| ≤ ε with probability ≥ 1−δ once n₀ ≥ (1−a)² ln(2/δ)/(2ε²) samples are drawn, but the authors note this is "sufficient, not necessary" — for 1000 items, a=0.2, δ=0.05 and ±0.05, it asks for 473 audits where an exact hypergeometric calculation needs only 192. The take-home messages recommend: rate agents on judgments, not agreement (which can reward shared bias); report precision and recall as an interval rather than a single number; let agents nominate separately and log who found each item; and compare the next agent with an audit before buying either, budgeting audits by the accuracy wanted rather than the number of agents.
-- **Limitation acknowledged (Section 3, "Overlap: an upper bound on recall"):** The positive-dependence assumption (Cov(B,B′ ∣ Y=1, C) ≥ 0) can be violated by specialists covering different parts of the collection, in which case the overlap bound should be applied within a specialism where it holds; sampled pools need weighting and add variance.
+1. **arXiv:2610.41738** — Search When Needed, Proceed When Reliable: Metacognitive Reliability Supervision for Efficient Agentic Search (Sun, Wu, Mao — Oct 2026)
+2. **arXiv:2610.37080** — Tessera: Structure-Completed Evidence Units for Web Retrieval-Augmented Generation (Hua, Sun, Zhuang, Qi, Qiu, Liu, Xiao — Oct 2026)
+3. **arXiv:2401.01330** — TREC iKAT 2023: The Interactive Knowledge Assistance Track Overview (Aliannejadi, Abbasiantaeb, Chatterjee, Dalton, Azzopardi — Jan 2024)
 
 ---
 
-## Paper 2: arXiv:2401.01330 — TREC iKAT 2023: The Interactive Knowledge Assistance Track Overview
+## Paper 1: arXiv:2610.41738
 
+**Title:** Search When Needed, Proceed When Reliable: Metacognitive Reliability Supervision for Efficient Agentic Search
+**Authors:** Minhao Sun, Zhijing Wu, Xian-Ling Mao
+**Subject category (from arXiv abs page):** Information Retrieval (cs.IR)
+**Submission date (from arXiv abs page):** v1, Fri, 30 Oct 2026 13:44:30 UTC
+**arXiv ID:** 2610.41738 (v1)
+
+### Abstract Summary
+
+This paper tackles the core decision in efficient agentic search: at each intermediate state, should the LLM search for external evidence or proceed using its current parametric knowledge? The authors argue that supervising search decisions with final-answer correctness or trajectory-level feedback is ambiguous, because a correct outcome can arise from either reliable knowledge or an unsupported lucky guess, and informative retrieval can still yield an incorrect final answer. They propose a metacognitive framework that scores each local conclusion by current-state reliability (can we proceed without search?) and by search-action reliability (how much does retrieved evidence improve reliability?), combining these into a process reward for GRPO. Experiments across seven question-answering benchmarks show a better accuracy-efficiency trade-off than strong agentic-search baselines.
+
+### Extracted Findings (with source sections)
+
+- **Finding 1 (Evaluation result, Section 1 Introduction):** Their 7B model achieves the highest average CEM across seven QA benchmarks (69.3), exceeding HiPRAG (the strongest baseline) by 2.1 points and improving on it across all seven datasets (as reported in Table 1). In controlled experiments, the policy reallocates search across task types: relative to a HiPRAG reimplementation, mean search calls decrease by approximately 20.9% on single-hop QA and increase by 6.6% on multi-hop QA, with 6.8% fewer searches overall (Table 5).
+- **Finding 2 (Design decision, Section 4 Methodology):** They define two scores: the Current-State Reliability Score, which evaluates whether the model can proceed without search by comparing its estimated reliability against a calibration reference, and the Search-Action Reliability Score, which measures the change in reliability between matched contexts with and without retrieved evidence. Averaging these action scores within each rollout yields a process reward that is added to answer and format rewards in GRPO, encouraging the policy to proceed when current information is reliable and to favor searches that improve reliability.
+- **Finding 3 (Limitation acknowledged, Section 1 Introduction):** The authors explicitly note the performance-reliability mismatch: overestimating current reliability leads to under-search, while underestimating it leads to over-search. They distinguish whether a local conclusion is correct from how reliably it can be reached with available information, and how much retrieval improved that reliability — correctness alone is an ambiguous signal for search supervision.
+- **Finding 4 (Empirical basis, Section 3.2 Empirical Uncertainty-Accuracy Relationship):** For Qwen2.5-7B, local accuracy decreases with mean conclusion uncertainty across 50,000 states (32 conclusions sampled per search state without current retrieval evidence), providing an empirical basis for estimating the reliability of local conclusions via sequence-level uncertainty.
+
+## Paper 2: arXiv:2610.37080
+
+**Title:** Tessera: Structure-Completed Evidence Units for Web Retrieval-Augmented Generation
+**Authors:** Peichun Hua, He Sun, Zirui Zhuang, Qi Qi, Yiming Qiu, Shinan Liu, Yunming Xiao
+**Subject category (from arXiv abs page):** Information Retrieval (cs.IR)
+**Submission date (from arXiv abs page):** v1, Tue, 27 Oct 2026 11:41:33 UTC
+**arXiv ID:** 2610.37080 (v1)
+
+### Abstract Summary
+
+Web RAG traditionally splits a page into fixed-size text chunks (or screenshot tiles) that serve simultaneously as units of indexing, ranking, and reading — and this coupling loses evidence, especially for structured content like tables and infoboxes. The authors trace answer evidence from source HTML to reader input over full English Wikipedia and find that stronger extraction, context expansion, and larger reader budgets do not naturally recover the loss. They introduce Tessera, a training-free evidence delivery layer that rebuilds ranked pages into fine-grained evidence units (completed with page title, section path, and table headers), selects query-relevant units, and packs them into the reader context at an unchanged token budget — leaving the index, retriever, and reader unchanged. Across three QA benchmarks, Tessera improves answer accuracy by 5-6 points on text and screenshot pipelines and carries gains over to multi-step agentic search.
+
+### Extracted Findings (with source sections)
+
+- **Finding 1 (Evaluation result, Section 2.1 "The Modality Gap Is a Ranking Gap"):** Once both text and screenshot pipelines rank their candidates well, the two modalities converge — with reranking the difference is -0.4 points on NQ, +1.4 on NQ-Tables, and +2.6 on SimpleQA. A text pipeline with the authors' own hybrid index (fusing dense and BM25 candidates) is the most accurate on every dataset, and both modalities share a ceiling (best pipeline retrieves the gold article in top 3 for 61.8% of NQ-Tables questions and answers 48.4% of them).
+- **Finding 2 (Evaluation result, Section 2.2 "Tracing Evidence from Source to Reader"):** For 9.7% of questions, a single stored chunk contains the complete evidence but is missing from the top three after ranking; placing that chunk in the third slot lifts accuracy on these questions from 49.1% to 78.5%. For 7.6% of source-supported questions, the evidence never enters the index intact, and 81% of these losses are table cells, table headers, or captions.
+- **Finding 3 (Design decision, Section 1 Introduction):** Tessera is a training-free, query-time layer that treats the ranked list as a pointer to anchor pages, parses their HTML into small evidence units (table rows, list items, paragraphs), completes each unit with structure (page title, section path, column headers via merged cells), and packs them into the reader's token budget. It plugs into text, screenshot, and agentic pipelines without retraining, and 3K tokens with Tessera beat 12K tokens of chunks or tiles (Section 4).
+- **Finding 4 (Limitation acknowledged, Section 1 Introduction):** The pipeline uses a single object (chunk or tile) as its unit of indexing, ranking, and reading — "it finds the right page and delivers the wrong part." Stronger extraction, context expansion, structure-aware reranking, and larger budgets leave the evidence loss in place, which is why Tessera instead decouples delivery from retrieval.
+
+## Paper 3: arXiv:2401.01330
+
+**Title:** TREC iKAT 2023: The Interactive Knowledge Assistance Track Overview
 **Authors:** Mohammad Aliannejadi, Zahra Abbasiantaeb, Shubham Chatterjee, Jeffery Dalton, Leif Azzopardi
-**Subject category (from abs page):** Information Retrieval (cs.IR); Artificial Intelligence (cs.AI); Computation and Language (cs.CL). Primary category: **cs.IR**
-**Submission date (from abs page):** [v1] Tue, 2 Jan 2024 18:40:03 UTC; [v2] Thu, 22 Feb 2024 17:29:03 UTC
-**Abstract page:** https://arxiv.org/abs/2401.01330
+**Subject category (from arXiv abs page):** Information Retrieval (cs.IR); Artificial Intelligence (cs.AI); Computation and Language (cs.CL)
+**Submission date (from arXiv abs page):** v1, Tue, 2 Jan 2024 18:40:03 UTC (revised v2, Thu, 22 Feb 2024)
+**arXiv ID:** 2401.01330 (v1/v2)
 
-### Abstract summary
+### Abstract Summary
 
-Conversational Information Seeking has evolved rapidly with Large Language Models providing the basis for interpreting and responding to user requests in a naturalistic manner. The TREC Interactive Knowledge Assistance Track (iKAT) emphasizes creating and researching conversational search agents (CSAs) that adapt responses based on the user's prior interactions and present context, so the same question can yield varied answers contingent on the user's profile and preferences. iKAT's first year attracted seven teams and 24 runs, most of which leveraged LLMs in their pipelines, with a few using a generate-then-retrieve approach. The track includes passage retrieval, statement ranking, and response generation tasks, with responses required to cite at least one "provenance" passage.
+This is an overview of the TREC Interactive Knowledge Assistance Track (iKAT) 2023, which builds on the earlier TREC Conversational Assistance Track (CAsT). iKAT emphasizes creating and researching conversational search agents that adapt responses based on user prior interactions and present context, so the same question can yield varied answers contingent on the user's profile and preferences. The track attracted seven teams and 24 runs, most of which leveraged LLMs (with a few using a generate-then-retrieve approach). The track defines passage retrieval, statement ranking, and response generation tasks over a Personal Text Knowledge Base (PTKB), using a ClueWeb22-B subset of ~116.8M passages.
 
-### Extracted findings (from full text)
+### Extracted Findings (with source sections)
 
-- **Finding 1 (Section 2, "Track, Tasks, Data, and Resources"):** The track provides three tasks — Statement Ranking (ranking relevant PTKB statements for the current user utterance as a relevance score prediction), Passage Ranking (retrieving and ranking relevant passages from the collection given the utterance, context, and PTKB), and Response Generation (fluent, informative responses that may be generative or abstractive and must cite at least one provenance passage). The collection is a manually curated subset of ClueWeb22-B (116,838,987 passages distributed by CMU), segmented using an MS MARCO-style methodology: each document shortened to 10,000 characters, then sliding windows of 10 consecutive sentences with a 5-sentence stride. Organizers provided four baseline runs, including llama2_only_10_docs, a pipeline that executes several interactions with LLaMA-2 7B using distinct prompts tailored to specific tasks (e.g., revising the most recent part of the ongoing conversation, reformulating the latest utterance, and optimizing the utterance for retrieval).
-- **Finding 2 (Section 1, "Introduction", and Section 2.4, "Baselines"):** iKAT's debut year attracted seven teams and 24 runs, most leveraging LLMs with only a few using a generate-then-retrieve approach; the Personal Text Knowledge Base (PTKB) encapsulates task contexts and user specifics as narrative sentences collected from previous user-system conversations (with care taken to exclude personally identifiable information). The baseline `llama2_only_10_docs` ranks third in human evaluation and was the least grounded, with only 23 of 73 responses deemed grounded in the companion iKAT 2023 test collection paper, suggesting its higher scores may stem from unfaithfulness to retrieved passages (possibly relying on internal knowledge) rather than retrieval quality.
-- **Finding 3 (Section 2.2, "Topics"):** Each iKAT 2023 topic includes 1–3 conversations with different personas on the same topic, and a "personalized turn" is defined as a turn with at least one relevant statement from the PTKB, meaning the system must consider at least one PTKB statement to answer accurately. Topic creation used step-by-step guidelines with a quality-assurance checklist covering persona-level, turn-level, and conversation-level criteria, with topics checked and refined by at least two expert annotators, and any that did not meet quality criteria were re-generated by another annotator.
+- **Finding 1 (Context and scale, Section 1 Introduction):** iKAT distinctively emphasizes conversational search agents that adapt responses to user prior interactions and present context, so the same question yields varied answers based on user profile and preferences (illustrated with personas Alice (vegan) and Bob (diabetes, nut allergy, lactose intolerant)). The track's first year attracted seven teams and 24 runs, most leveraging LLMs, with a few focusing on generate-then-retrieve approaches.
+- **Finding 2 (Design decision, Section 2 "Track, Tasks, Data, and Resources"):** The track includes three tasks — Statement Ranking (ranking relevant PTKB statements for the current utterance), Passage Ranking (retrieving and ranking relevant passages given conversation context and PTKB), and Response Generation (fluent, informative responses that cite at least one provenance passage). They used a 116,838,987-passage subset of ClueWeb22-B, segmenting documents with a sliding window (10 consecutive sentences per passage, 5-sentence stride), and provided four baselines including a LLaMA-2 7B pipeline with task-specific prompts.
+- **Finding 3 (Limitation acknowledged, Section 1 Introduction):** Every response should cite at least one provenance passage, maintaining a focus on passage/provenance ranking; the track also emphasizes decisional search tasks where users sift through data to weigh options. The personal information provided (PTKB) is assumed to be high-level narrative sentences collected from prior conversations, with care taken to exclude personally identifiable information to ensure contributor privacy.
 
----
+### How to Read These Notes
 
-## Paper 3: arXiv:2404.08630 — A Conceptual Framework for Conversational Search and Recommendation: Conceptualizing Agent-Human Interactions During the Conversational Search Process
-
-**Authors:** Leif Azzopardi, Mateusz Dubiel, Martin Halvey, Jeffery Dalton
-**Subject category (from abs page):** Information Retrieval (cs.IR); Artificial Intelligence (cs.AI). Primary category: **cs.IR**
-**Submission date (from abs page):** [v1] Fri, 12 Apr 2024 17:48:18 UTC
-**Abstract page:** https://arxiv.org/abs/2404.08630 (Journal reference: The Second International Workshop on Conversational Approaches to Information Retrieval (CAIR 2018) at ACM SIGIR)
-
-### Abstract summary
-
-The conversational search task aims to enable a user to resolve information needs via natural language dialogue with an agent. This paper develops a conceptual framework of the actions and intents of users and agents, explaining how these actions enable the user to explore the search space and resolve their information need. It outlines the different actions and intents, then discusses key decision points in the conversation where the agent must decide how to steer the conversational search process to a successful and/or satisfactory conclusion. The framework provides a starting point for research, development, and evaluation of conversational search agents.
-
-### Extracted findings (from full text)
-
-- **Finding 1 (Section 3, "Conversational Actions and Agent Decisions" — "Assumptions"):** The paper takes a focused view assuming the hypothesized agent wants to (1) help the user — cooperative, not adversarial, not seeking to maximize its own benefit; (2) minimize conversational effort — avoiding idle chit-chat and excessive questions that burden the user's cognitive capacity; and (3) maximize the range/number of relevant options provided to the user. The authors acknowledge a limitation here: they assume the agent has sufficient capabilities to understand and respond to user requests, and assume "for the purposes of simulated conversations we assume that the agent has the capacity to perfectly understand the user's utterances and requests, and can provide meaningful and relevant responses. We acknowledge that these are both very much open challenges that have yet to be fully addressed."
-- **Finding 2 (Section 3.2, "Agent Actions", drawing on prior work by Bohus and Rudnicky, Moore, and Demberg et al.):** Agent actions include elicitation (learning about the user's preferences), conversation management that tracks and maintains search goals, conversational history, and the agent's current state of understanding; the framework also covers repair and disengagement strategies (repeating information or asking for it to be repeated in case of misunderstanding) and the ability of agents to explain their current state (reporting what they understand) so that misunderstandings can be corrected. The paper grounds this in Radlinski and Craswell's five properties of a conversational search agent: user revealment, agent revealment, mixed initiative, memory, and set retrieval.
-- **Finding 3 (Section 3.3, "Agent Decisions and Tasks", and Section 4, "Discussion"):** The framework enumerates key decision points where the agent must decide how to steer the conversation to a successful or satisfactory conclusion, distinguishing three phases (query formulation, search results exploration, and query re-formulation) per Trippas et al., in which the agent elicits details of the information need and obtains feedback on results to inform subsequent actions. The discussions position the framework as a formalization that makes explicit the actions and decisions previously only identified in Wizard-of-Oz and log studies, providing a framework and starting point for research, development, and evaluation of conversational search agents.
-
----
-
-## Discussion points for the team sync
-
-- **Evaluation infrastructure matters as much as model quality:** The iKAT track (Paper 2) shows that persona-aware, knowledge-grounded benchmarks with provenance-citation requirements are needed to properly evaluate conversational search agents; bare retrieval metrics are insufficient, and the companion evaluation found grounding issues (only 23/73 responses grounded for the LLaMA-2 baseline).
-- **Tool-call efficiency is a first-class training concern:** Paper 1 (Multi-Agent Screening) argues that when agents screen items for a costly human assessor, agreement is not correctness and assessor acceptance gives only a lower bound on recall — so we should rate agents on judgments, report recall as an interval, and use audits of non-passed items to pin down missed relevant items without assumptions about the agents.
-- **Trust and grounding:** The iKAT response evaluation (Paper 2) found the LLaMA-2 baseline grounded only 23 of 73 responses, flagging faithfulness risks that underpin user trust in AI assistants; Paper3's framework (2404.08630) formalizes the agent actions (elicitation, explanation of state, repair) needed to support trust.
-- **Size and effort tiers matter:** Gains from tool-call efficiency training (Paper 1's worked example and the broader literature) are clearer at larger model sizes (27B, 4B) than at 9B, where compression encroaches on necessary calls — so deployment choices (model size, effort tier) should be explicit rather than hidden in training objectives.
-
-*Note: All three papers were selected from recent arXiv listings searched under the phrasings "conversational search agents", "tool use in LLM agents", and "user trust in AI assistants". Full texts were read via the arXiv download tooling, and subject category and submission dates were verified on each paper's public arXiv abstract page.*
+- Paper 1 (2610.41738) is the most directly on-topic for our sync: it is about training LLM agents to decide when to search vs. proceed, with concrete benchmark results and a GRPO process-reward design.
+- Paper 2 (2610.37080) is highly relevant to the retrieval quality side of agentic search: it shows that chunk/tile-based retrieval loses structured evidence and that a lightweight, training-free delivery layer (Tessera) recovers 5-6 points of accuracy.
+- Paper 3 (2401.01330) provides the evaluation-background perspective: a shared TREC-style benchmark (iKAT) with LLM-era baselines for conversational search agents, useful for comparing assistant designs.
